@@ -13,13 +13,39 @@
 <body ng-app="chat">
 <div class="container">
     <div id="login" ng-controller="login" ng-if=!isLoged>
-        <div class="form-group">
-            <label for="">Please enter your name </label>
-            <input type="text" name="" ng-model="username" id="" class="form-control" placeholder=""
-                   aria-describedby="helpId">
-            <br>
-            <button type="submit" ng-click="login()" class="btn btn-primary">Login</button>
+        <div id="login-row" class="row justify-content-center align-items-center">
+            <div id="login-column" class="col-md-6">
+                <div class="box">
+                    <div class="shape1"></div>
+                    <div class="shape2"></div>
+                    <div class="shape3"></div>
+                    <div class="shape4"></div>
+                    <div class="shape5"></div>
+                    <div class="shape6"></div>
+                    <div class="shape7"></div>
+                    <div class="float">
+                        <form class="form" action="">
+                            <div class="form-group">
+                                <!--<label for="username" class="text-white">Username:</label><br>-->
+                                <!--<input type="text" name="username" id="username" class="form-control">-->
+
+
+                                <label for="">Please enter your name </label>
+                                <input type="text" name="" ng-model="username"  class="form-control" placeholder=""
+                                       aria-describedby="helpId">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" ng-click="login()" class="btn btn-primary">Login</button>
+
+                                <!--<input type="submit" name="submit" class="btn btn-info btn-md" value="submit">-->
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+
+
     </div>
 
     <div class="messaging" ng-if=isLoged ng-controller="chat">
