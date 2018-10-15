@@ -9,7 +9,6 @@ app.controller('chat', function (mySocket, $scope, $rootScope) {
 
     /*################ new message ################### */
     mySocket.on('new message', function (data) {
-        debugger
 
         $rootScope.typing = false;
 
@@ -21,16 +20,17 @@ app.controller('chat', function (mySocket, $scope, $rootScope) {
         }
     });
 
+    /*################ sendMessage ################### */
     mySocket.on('sendMessage', function (data) {
 
         $rootScope.typing = false;
 
         var name = data.username;
         if (name == $rootScope.currentUser) {
-            name += ' (Your)'
+            name = ' (You)'
         }
         if (data.message) {
-            $scope.messages.push(name + ': ' + data.message)
+            $scope.messages.push(name + ": " + data.message )
         }
         if (data.onlineUsers) {
             $scope.users = data.onlineUsers
@@ -59,8 +59,16 @@ app.controller('chat', function (mySocket, $scope, $rootScope) {
         }
     });
 
+/* todo */
+    $scope.typing = function (e) {
+        if ($scope.msg) {
+            mySocket.emit('typing', $scope.msg);
+        }
+    };
+
 
     /*################ typing ################### */
+    /* todo */
     mySocket.on('typing', (data) => {
         $scope.logs.push(data.username + ' Typing');
 
@@ -68,15 +76,10 @@ app.controller('chat', function (mySocket, $scope, $rootScope) {
 
 
     $scope.sendMessage = function (e) {
-        // $scope.typing = false;
         mySocket.emit('sendMessage', $scope.msg);
-        delete  $scope.msg;
+        delete  $scope.msg; // to empty input
         e.preventDefault()
 
     };
-    $scope.typing = function (e) {
-        if ($scope.msg) {
-            mySocket.emit('typing', $scope.msg);
-        }
-    };
+
 });

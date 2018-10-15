@@ -1,17 +1,16 @@
 <!doctype html>
-<html>
+<html ng-app="chat">
 
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.js"></script>
-    <title>Socket.IO chat</title>
     <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico'/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles.css">
-
+    <title>Socket.IO chat :: ({{currentUser}})</title>
 </head>
 
-<body ng-app="chat">
+<body >
 <div class="container">
     <div id="login" ng-controller="login" ng-if=!isloggedin>
         <div id="login-row" class="row justify-content-center align-items-center">
@@ -25,20 +24,14 @@
                     <div class="shape6"></div>
                     <div class="shape7"></div>
                     <div class="float">
-                        <form class="form" action="">
+                        <form class="form">
                             <div class="form-group">
-                                <!--<label for="username" class="text-white">Username:</label><br>-->
-                                <!--<input type="text" name="username" id="username" class="form-control">-->
-
-
                                 <label>Please enter your name </label>
                                 <input type="text" name="" ng-model="username" class="form-control" placeholder=""
                                        aria-describedby="helpId">
                             </div>
                             <div class="form-group">
                                 <button type="submit" ng-click="login()" class="btn btn-primary">Login</button>
-
-                                <!--<input type="submit" name="submit" class="btn btn-info btn-md" value="submit">-->
                             </div>
                         </form>
                     </div>
@@ -137,12 +130,14 @@
                 </div>
                 <div class="type_msg">
                     <div class="input_msg_write">
+                        <form action="">
                         <input
                                 ng-change=typing($event)
                                 ng-model-options='{ debounce: 600 }'
                                 type="text" ng-model="msg" class="write_msg" placeholder="Type a message">
                         <button class="msg_send_btn" type="submit" ng-click=sendMessage($event)><i
                                 class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                        </form>
                     </div>
                 </div>
             </div>
