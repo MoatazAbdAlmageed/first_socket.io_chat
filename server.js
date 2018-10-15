@@ -4,7 +4,7 @@ var app = express();
 var path = require('path');
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
-var port = process.env.PORT || 7000;
+var port = process.env.PORT || 3000;
 server.listen(port, () => {
     console.log('Server listening at port %d', port);
 });
@@ -18,6 +18,9 @@ app.use(express.static(path.join(__dirname, 'front')));
 var onlineUsers = [];
 
 io.on('connection', (socket) => {
+
+    console.log("connection Done with id=> ",socket.id);
+    socket.emit('before login', {log: "Welcome from socket"});
 
     // when the client emits 'user join', this listens and executes
     socket.on('user join', (username) => {
@@ -48,7 +51,7 @@ io.on('connection', (socket) => {
     socket.on('sendMessage', (data) => {
         console.log("sendMessage");
         // we tell the client to execute 'new message'
-        io.emit('sendMessage', {
+        io.sockets.emit('sendMessage', {
             username: socket.username,
             message: data
         });

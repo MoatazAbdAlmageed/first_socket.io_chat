@@ -34,6 +34,10 @@
                                 <button type="submit" ng-click="login()" class="btn btn-primary">Login</button>
                             </div>
                         </form>
+
+                        <ul>
+                            <li ng-repeat="log in logs track by $index">{{log}}</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -133,7 +137,6 @@
                         <form action="">
                         <input
                                 ng-change=typing($event)
-                                ng-model-options='{ debounce: 600 }'
                                 type="text" ng-model="msg" class="write_msg" placeholder="Type a message">
                         <button class="msg_send_btn" type="submit" ng-click=sendMessage($event)><i
                                 class="fa fa-paper-plane-o" aria-hidden="true"></i></button>

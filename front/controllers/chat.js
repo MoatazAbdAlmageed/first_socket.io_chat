@@ -1,4 +1,4 @@
-app.controller('chat', function (mySocket, $scope, $rootScope) {
+app.controller('chat', function (mySocket, $scope, $rootScope,$window) {
     $scope.messages = [];
     $scope.logs = [];
     $scope.typist = {};
@@ -18,6 +18,9 @@ app.controller('chat', function (mySocket, $scope, $rootScope) {
         if (data.onlineUsers) {
             $scope.users = data.onlineUsers
         }
+        document.getElementsByClassName('msg_history')[0].scrollTop = -1
+
+
     });
 
     /*################ sendMessage ################### */
@@ -27,7 +30,7 @@ app.controller('chat', function (mySocket, $scope, $rootScope) {
 
         var name = data.username;
         if (name == $rootScope.currentUser) {
-            name = ' (You)'
+            name = 'You'
         }
         if (data.message) {
             /* todo fix insertig messages with comma like I'm 27 */
