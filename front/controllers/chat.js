@@ -30,7 +30,8 @@ app.controller('chat', function (mySocket, $scope, $rootScope) {
             name = ' (You)'
         }
         if (data.message) {
-            $scope.messages.push(name + ": " + data.message )
+            /* todo fix insertig messages with comma like I'm 27 */
+            $scope.messages.push(name + ": " +  "\n"+ data.message );
         }
         if (data.onlineUsers) {
             $scope.users = data.onlineUsers
